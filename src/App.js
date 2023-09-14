@@ -27,7 +27,7 @@ function App() {
     else {
       clearInterval(timerID);
     }
-  }, [isRunning])
+  }, [isRunning]) // eslint-disable-line
 
   const clickStart = () => {
     setStatus(1);
