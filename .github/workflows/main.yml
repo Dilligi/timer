@@ -1,29 +1,8 @@
-name: CI
+name: CI/CD
 
 on: [push, pull_request]
 
 jobs:
-  # commitlint:
-  #   runs-on: ubuntu-22.04
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #       with:
-  #         token: ${{ secrets.REPO_SECRET }}
-  #     - uses: actions/setup-node@v1
-  #       with:
-  #         node-version: '14.x'
-  #     - name: Install commitlint
-  #       run: |
-  #         npm install -g @commitlint/cli @commitlint/config-conventional
-
-  #     - name: Validate current commit (last commit) with commitlint
-  #       if: github.event_name == 'push'
-  #       run: |
-  #         npx commitlint --from=HEAD~1
-
-  #     - name: Validate PR commits with commitlint
-  #       if: github.event_name == 'pull_request'
-  #       run: npx commitlint --from=${{ github.event.pull_request.head.sha }}~${{ github.event.pull_request.commits }} --to=${{ github.event.pull_request.head.sha }} --verbose
   
   build:
     runs-on: ubuntu-latest
@@ -43,6 +22,12 @@ jobs:
         run: |
           npm ci --force
           npm run build
+
+      - name: Deploy app
+        uses: bitovi/github-actions-react-to-github-pages@v1.2.0
+        with:
+          path: build 
+
           
       
       
