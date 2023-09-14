@@ -29,9 +29,12 @@ jobs:
           npm run build
 
       - name: Deploy app
-        uses: bitovi/github-actions-react-to-github-pages@v1.2.0
+        uses: crazy-max/ghaction-github-pages@v4
         with:
-          path: build 
+          target_branch: gh-pages
+          build_dir: build
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
           
       
